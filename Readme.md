@@ -13,7 +13,8 @@ Creates Healpix indices for RA,DEC pair taken from a file
 
 #### required named arguments:
 
-    -i INPUT, --input INPUT --> The name of the input file
+    -i INPUT, --input INPUT 
+    The name of the input file
 
   -o OUTPUT, --output OUTPUT
                         The name of the output file
