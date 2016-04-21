@@ -3,7 +3,7 @@
 Small routine to convert from RA,DEC to HEALPIX pixel indices to
 be ingested in the DB
 """
-import hpixdb
+from hpixdb import *
 
 if __name__ == '__main__':
     hpix_tools.main()
