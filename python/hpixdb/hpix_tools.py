@@ -27,16 +27,17 @@ def main():
         prog="hpixDB",
         usage='%(prog)s [-h] -i INPUT -o OUTPUT -c COLUMNS [--nside NSIDE] [--hpix_col HPIX_COL]',
         add_help=True)
-    required_args = parser.add_argument_group('required named arguments')
+    required_args = parser.add_argument_group('Required named arguments')
     required_args.add_argument("-i", "--input", type=str, action="store", default=None, required=True,
                                help="The name of the input file")
     required_args.add_argument("-o", "--output", type=str, action="store", default=None, required=True,
                                help="The name of the output file")
     required_args.add_argument("-c", "--columns", type=str, action="store",
                                default="NUMBER,ALPHAWIN_J2000,DELTAWIN_J2000",
+                               required=True,
                                help="The name of the 3 columns used separated by comas, \
                                e.g.: NUMBER,RA,DEC, default=NUMBER,ALPHAWIN_J2000,DELTAWIN_J2000")
-    optional_args = parser.add_argument_group('optional named arguments')
+    optional_args = parser.add_argument_group('Optional named arguments')
     optional_args.add_argument("--nside", type=int, action="store", default=16384,
                                help="Nside value for Healpix, has to be a power of 2")
     optional_args.add_argument("--hpix_col", type=str, action="store", default="HPIX",
