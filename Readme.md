@@ -7,6 +7,9 @@ be ingested in the DB
 
     hpixDB [-h] -i INPUT -o OUTPUT -c COLUMNS [--nside NSIDE] [--hpix_col HPIX_COL]
 
+For help use:
+
+    hpixDB --help
 #### Description
 
 Creates Healpix indices for RA,DEC pair taken from a file
@@ -16,13 +19,18 @@ Creates Healpix indices for RA,DEC pair taken from a file
     -i INPUT, --input INPUT 
     The name of the input file
 
-  -o OUTPUT, --output OUTPUT
-                        The name of the output file
-  -c COLUMNS, --columns COLUMNS
-                        The name of the 3 columns used separated by comas,
-                        e.g.: NUMBER,RA,DEC,
-                        default=NUMBER,ALPHAWIN_J2000,DELTAWIN_J2000
+    -o OUTPUT, --output OUTPUT
+    The name of the output file
 
-optional named arguments:
-  --nside NSIDE         Nside value for Healpix, has to be a power of 2
-  --hpix_col HPIX_COL   The name of the healpix indices column in the output file
+    -c COLUMNS, --columns COLUMNS
+    The name of the 3 columns used separated by comas,
+    e.g.: NUMBER,RA,DEC,
+    default=NUMBER,ALPHAWIN_J2000,DELTAWIN_J2000
+
+#### optional named arguments:
+
+    --nside NSIDE
+    Nside value for Healpix, has to be a power of 2
+
+    --hpix_col HPIX_COL
+    The name of the healpix indices column in the output file
