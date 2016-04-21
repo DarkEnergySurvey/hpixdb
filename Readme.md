@@ -5,16 +5,16 @@ be ingested in the DB
 
 ### Use
 
-    usage: hpixDB [-h] -i INPUT -o OUTPUT -c COLUMNS [--nside NSIDE] [--hpix_col HPIX_COL]
+    hpixDB [-h] -i INPUT -o OUTPUT -c COLUMNS [--nside NSIDE] [--hpix_col HPIX_COL]
+
+#### Description
 
 Creates Healpix indices for RA,DEC pair taken from a file
 
-optional arguments:
-  -h, --help            show this help message and exit
+#### required named arguments:
 
-required named arguments:
-  -i INPUT, --input INPUT
-                        The name of the input file
+    -i INPUT, --input INPUT --> The name of the input file
+
   -o OUTPUT, --output OUTPUT
                         The name of the output file
   -c COLUMNS, --columns COLUMNS
