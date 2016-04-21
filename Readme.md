@@ -4,7 +4,8 @@ Small routine to convert from RA,DEC to HEALPIX pixel indices to
 be ingested in the DB
 
 ### Use
-usage: hpixDB [-h] -i INPUT -o OUTPUT -c COLUMNS [--nside NSIDE] [--hpix_col HPIX_COL]
+
+    usage: hpixDB [-h] -i INPUT -o OUTPUT -c COLUMNS [--nside NSIDE] [--hpix_col HPIX_COL]
 
 Creates Healpix indices for RA,DEC pair taken from a file
 
