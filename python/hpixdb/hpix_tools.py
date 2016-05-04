@@ -63,5 +63,5 @@ def main():
     data_out[index_col] = data_in[index_col]
     data_out[hpix_col] = pixs
     # Write fits file
-    fitsio.write(args.output, data_out, clobber=True)
+    fitsio.write(args.output, data_out, extname='OBJECTS', clobber=True)
 
