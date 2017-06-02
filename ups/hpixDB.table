@@ -1,5 +1,5 @@
-setupRequired(fitsio 0.9.8rc1+3)
-setupRequired(healpy 1.8.1+4)
+setupRequired(fitsio 0.9.8rc1+6)
+setupRequired(healpy 1.8.1+7)
 
 envPrepend(PYTHONPATH, ${PRODUCT_DIR}/python)
 envPrepend(PATH, ${PRODUCT_DIR}/bin)
