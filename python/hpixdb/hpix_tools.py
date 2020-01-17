@@ -2,11 +2,11 @@
 Small routine to convert from RA,DEC to HEALPIX pixel indices to
 be ingested in the DB
 """
+import os
 import argparse
 import fitsio
-import healpy
 import numpy
-import os
+import healpy
 
 def main():
     """
@@ -22,11 +22,13 @@ def main():
 
     This will generate a fits file with 2 a index column and healpix column with indices
     """
-    parser = argparse.ArgumentParser(
-        description="Creates Healpix indices for RA,DEC pair taken from a file",
-        prog="hpixDB",
-        usage='%(prog)s [-h] -i INPUT -o OUTPUT -c COLUMNS [--nsides NSIDE1 NSIDE2 ... NSIDEN] [--hpix_cols HPIX_COL1 HPIX_COLL2 ... HPIX_COLN]',
-        add_help=True)
+    prog = "hpixDB"
+    parser = argparse.ArgumentParser(description="Creates Healpix indices for RA,DEC pair taken from a file",
+                                     prog=prog,
+                                     usage=f"{prog} [-h] -i INPUT -o OUTPUT -c COLUMNS " \
+                                           + "[--nsides NSIDE1 NSIDE2 ... NSIDEN] " \
+                                           + "[--hpix_cols HPIX_COL1 HPIX_COLL2 ... HPIX_COLN]",
+                                     add_help=True)
     required_args = parser.add_argument_group('Required named arguments')
     required_args.add_argument("-i", "--input", type=str, action="store", default=None, required=True,
                                help="The name of the input file")
@@ -38,7 +40,7 @@ def main():
                                help="The name of the 3 columns used separated by comas, \
                                e.g.: NUMBER,RA,DEC, default=NUMBER,ALPHAWIN_J2000,DELTAWIN_J2000")
     optional_args = parser.add_argument_group('Optional named arguments')
-    optional_args.add_argument("--nsides", action="store", default='32, 64, 1024, 4096, 16384',
+    optional_args.add_argument("--nsides", action="store", default="32, 64, 1024, 4096, 16384",
                                help="Nside(s) value for Healpix, has to be a power of 2")
     args = parser.parse_args()
 
@@ -53,8 +55,8 @@ def main():
 
     # The filename we'll store and it format
     filename = os.path.basename(args.input)
-    FILENAME_SIZE = 'S%s' % len(filename)
-    
+    FILENAME_SIZE = f"S{len(filename):d}"
+
     # Read 3 columns from input data
     # We will assume that we have either SEpoch catalogs with 'LDAC_OBJECTS' format or, MEpoch with OBJECTS
     tab = fitsio.FITS(args.input)
@@ -66,15 +68,15 @@ def main():
         raise IOError("Could not find LDAC_OBJECTS or OBJECTS hdu on file")
 
     # Convert to radians
-    phi = data_in[ra_col]/180.*numpy.pi
-    theta = (90. - data_in[dec_col])/180.*numpy.pi
+    phi = data_in[ra_col] / 180. * numpy.pi
+    theta = (90. - data_in[dec_col]) / 180. * numpy.pi
 
     # Create Data Array for output  before populating it
     nrows = len(phi)
-    hpix_cols = ["HPIX_%s" % nside for nside in args.nsides]
-    dtypes=zip(hpix_cols,['i8']*5)
-    dtypes.insert(0,(index_col, 'i8'))
-    dtypes.insert(1,('FILENAME', FILENAME_SIZE))
+    hpix_cols = [f"HPIX_{nside}" for nside in args.nsides]
+    dtypes = list(zip(hpix_cols, ['i8'] * 5))
+    dtypes.insert(0, (index_col, 'i8'))
+    dtypes.insert(1, ('FILENAME', FILENAME_SIZE))
     data_out = numpy.zeros(nrows, dtype=dtypes)
 
     # Populate OBJECT and FILENAME needed for DB ingestion
@@ -90,4 +92,3 @@ def main():
 
     # Write fits file
     fitsio.write(args.output, data_out, extname='OBJECTS', clobber=True)
-
