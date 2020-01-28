@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Small routine to convert from RA,DEC to HEALPIX pixel indices to
 be ingested in the DB
